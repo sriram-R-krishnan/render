@@ -5,10 +5,8 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 app.use(express.json());
-const dbUrl =
-  "mongodb+srv://swathy:Swathy1996@cluster0.lvwbu.mongodb.net/passwordReset?retryWrites=true&w=majority";
+const dbUrl = "mongodb+srv://swathy:Swathy1996@cluster0.lvwbu.mongodb.net/passwordReset?retryWrites=true&w=majority";
 
-// const dbUrl = "mongodb://127.0.0.1:27017/"
 const client = new MongoClient(dbUrl);
 const port = 3001;
 
