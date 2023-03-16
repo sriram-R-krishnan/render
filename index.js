@@ -44,63 +44,63 @@ app.post("/createUser", async (req, res) => {
   }
 });
 
-// updating user information
-// app.put("/updateuser/:email", async (req, res) => {
-//   const client = await MongoClient.connect(dbUrl);
-//   try {
-//     if (req.params.email) {
-//       const db = await client.db("user_management");
-//       let user = await db
-//         .collection("All Accounts")
-//         .findOne({ email: req.params.email });
-//       if (user) {
-//         db
-//           .collection("All Accounts")
-//           .updateOne({ email: req.params.email }, { $set: req.body });
-//         res.status(200).send({ message: "User info updated successfully" });
-//       } else {
-//         res
-//           .status(400)
-//           .send({ message: `User not found with email ${user}` });
-//       }
-//     } else {
-//       res.status(400).send({ message: "email is mandatory" });
-//     }
-//   } catch (error) {
-//     res.status(400).send({ message: "Internal server error", error });
-//   } finally {
-//     client.close();
-//   }
-// });
+updating user information
+app.put("/updateuser/:email", async (req, res) => {
+  const client = await MongoClient.connect(dbUrl);
+  try {
+    if (req.params.email) {
+      const db = await client.db("user_management");
+      let user = await db
+        .collection("All Accounts")
+        .findOne({ email: req.params.email });
+      if (user) {
+        db
+          .collection("All Accounts")
+          .updateOne({ email: req.params.email }, { $set: req.body });
+        res.status(200).send({ message: "User info updated successfully" });
+      } else {
+        res
+          .status(400)
+          .send({ message: `User not found with email ${user}` });
+      }
+    } else {
+      res.status(400).send({ message: "email is mandatory" });
+    }
+  } catch (error) {
+    res.status(400).send({ message: "Internal server error", error });
+  } finally {
+    client.close();
+  }
+});
 
-// deleting user account
-// app.delete("/deleteUser/:email", async (req, res) => {
-//   const client = await MongoClient.connect(dbUrl);
-//   try {
-//     if (req.params.email) {
-//       const db = await client.db("user_management");
-//       let user = await db
-//         .collection("All Accounts")
-//         .findOne({ email: req.params.email });
-//       if (user) {
-//         let user = await db
-//           .collection("All Accounts")
-//           .deleteOne({ email: req.params.email });
-//         res.status(200).send({ message: "User deleted successfully" });
-//       } else {
-//         res
-//           .status(400)
-//           .send({ message: `User not found with email ${req.params.email}` });
-//       }
-//     } else {
-//       res.status(400).send({ message: "email is mandatory" });
-//     }
-//   } catch (error) {
-//     res.status(400).send({ message: "Internal server error", error });
-//   } finally {
-//     client.close();
-//   }
-// });
+deleting user account
+app.delete("/deleteUser/:email", async (req, res) => {
+  const client = await MongoClient.connect(dbUrl);
+  try {
+    if (req.params.email) {
+      const db = await client.db("user_management");
+      let user = await db
+        .collection("All Accounts")
+        .findOne({ email: req.params.email });
+      if (user) {
+        let user = await db
+          .collection("All Accounts")
+          .deleteOne({ email: req.params.email });
+        res.status(200).send({ message: "User deleted successfully" });
+      } else {
+        res
+          .status(400)
+          .send({ message: `User not found with email ${req.params.email}` });
+      }
+    } else {
+      res.status(400).send({ message: "email is mandatory" });
+    }
+  } catch (error) {
+    res.status(400).send({ message: "Internal server error", error });
+  } finally {
+    client.close();
+  }
+});
 
 app.listen(port, () => {
   console.log(`App listening on ${port}`);
